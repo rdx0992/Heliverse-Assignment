@@ -1,0 +1,7 @@
+1. Describe one of the most complex DevOps tasks you've tackled to date? We're interested in understanding the learning process you undertook and the steps you followed to successfully accomplish it.
+2. Please provide a detailed step-by-step guide on how to:
+  Deploy a ReactJS application on the root domain (abc.com),
+  Deploy an AngularJS application on a subdirectory (abc.com/dashboard), and
+  Deploy a Java Spring Boot application on a subdomain (api.abc.com)?
+  using AWS resources, Keep in mind the resources you are planning on using should have zero to no cost.
+3. In the second step how will you add CI/CD pipeline from github actions?
