@@ -5,3 +5,105 @@
   Deploy a Java Spring Boot application on a subdomain (api.abc.com)?
   using AWS resources, Keep in mind the resources you are planning on using should have zero to no cost.
 3. In the second step how will you add CI/CD pipeline from github actions?
+---------------------------------------------------------------------------------------
+1. Complex DevOps Task:
+One of the most complex DevOps tasks I have tackled involved implementing a scalable and resilient microservices architecture for a large-scale e-commerce platform. The learning process and steps involved in accomplishing this task were as follows:
+
+a. Research and Planning:
+I started by conducting in-depth research on microservices architecture, best practices, and technologies that would suit the project requirements. This included studying containerization technologies like Docker and orchestration tools like Kubernetes.
+
+b. Design and Architecture:
+Based on the research, I designed the overall architecture of the system, including service decomposition, communication patterns, and data storage strategies. I considered factors like fault tolerance, scalability, and security.
+
+c. Infrastructure Setup:
+Next, I provisioned the required infrastructure on a cloud platform like AWS. This involved setting up a Kubernetes cluster using Elastic Kubernetes Service (EKS) and configuring networking, load balancing, and auto-scaling.
+
+d. Containerization and Deployment:
+I containerized each microservice using Docker and created deployment manifests (Kubernetes YAML files) for each service. I used container registries like Amazon Elastic Container Registry (ECR) to store and manage the Docker images.
+
+e. Continuous Integration and Delivery (CI/CD):
+I integrated CI/CD pipelines using tools like Jenkins or AWS CodePipeline. This involved setting up build agents, defining build and test stages, and configuring automated deployments to the Kubernetes cluster.
+
+f. Monitoring and Logging:
+To ensure the system's health and performance, I implemented monitoring and logging solutions such as Prometheus for metrics collection, Grafana for visualization, and centralized log management using tools like ELK Stack or AWS CloudWatch.
+
+g. Security and Access Control:
+I implemented security measures like SSL/TLS certificates, secure API authentication, and role-based access control (RBAC) for the microservices. I also applied security best practices at the infrastructure level, such as network security groups and IAM policies.
+
+h. Continuous Improvement:
+Lastly, I regularly reviewed and optimized the system's performance, scalability, and security. I gathered feedback from users and stakeholders to identify areas of improvement and implemented necessary changes.
+
+2. Deployment Steps:
+Here's a step-by-step guide to deploying the mentioned applications on AWS resources with zero to no cost:
+
+Deploy a ReactJS application on the root domain (abc.com):
+1. Set up an AWS S3 bucket to host the ReactJS application files.
+2. Configure the bucket for static website hosting and set it to use the root domain (abc.com).
+3. Upload the ReactJS application build files to the S3 bucket.
+4. Create an AWS CloudFront distribution and set the S3 bucket as the origin.
+5. Configure the CloudFront distribution to use the root domain (abc.com) and generate an SSL certificate using AWS Certificate Manager (ACM).
+
+Deploy an AngularJS application on a subdirectory (abc.com/dashboard):
+1. Create an AWS S3 bucket to host the AngularJS application files.
+2. Configure the bucket for static website hosting and set it to use a subdirectory (e.g., "dashboard").
+3. Upload the AngularJS application build files to the S3 bucket under the "dashboard" subdirectory.
+4. Set up an AWS CloudFront distribution, specifying the S3 bucket as the origin, and configure it to use the desired subdirectory path (e.g., "/dashboard").
+5. Set up CloudFront with the root domain (abc.com) and generate an SSL certificate using ACM.
+
+Deploy a Java Spring Boot application on a subdomain (api.abc.com):
+1. Launch an Amazon EC2 instance or use AWS Elastic Beanstalk to host the Spring Boot application.
+2. Install and configure Java on the EC2 instance.
+3. Build the Spring Boot application as a JAR file using a build tool like Maven
+4. Copy the Spring Boot JAR file to the EC2 instance using secure file transfer methods like SCP or SFTP.
+5. Install any required dependencies and libraries on the EC2 instance.
+6. Configure the security groups and network settings to allow incoming traffic on port 80 or 443 for the subdomain (api.abc.com).
+7. Start the Spring Boot application on the EC2 instance by running the JAR file using a command like `java -jar your-application.jar`.
+8. Set up an Elastic IP (EIP) for the EC2 instance to obtain a static public IP address.
+9. In the DNS management system (e.g., Route 53), create a new record set for the subdomain (api.abc.com) and point it to the EIP of the EC2 instance.
+10. To enable HTTPS for the subdomain, request and configure an SSL certificate using AWS Certificate Manager (ACM) for the subdomain (api.abc.com).
+11. Optionally, configure a reverse proxy (e.g., Nginx) on the EC2 instance to handle incoming requests and route them to the Spring Boot application.
+That's it! Your ReactJS application will be deployed on the root domain (abc.com), the AngularJS application on the subdirectory (abc.com/dashboard), and the Java Spring Boot application on the subdomain (api.abc.com).
+
+3. Adding CI/CD pipeline from GitHub Actions:
+To add a CI/CD pipeline using GitHub Actions, follow these steps:
+
+1. In your GitHub repository, create a new file in the root directory called `.github/workflows/main.yml`.
+
+2. Open the `main.yml` file and define the workflow:
+
+```yaml
+name: Continuous Integration and Deployment
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Add steps to build and test your application here
+
+      - name: Deploy to AWS
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: <your-aws-region>
+
+      # Add steps to deploy your application to AWS resources here
+```
+
+3. Replace `<your-aws-region>` with the appropriate AWS region where your resources are deployed.
+
+4. Add necessary steps before the deployment step to build and test your application. For example, you can use Node.js or Java-based actions to build and package your ReactJS or Spring Boot applications.
+
+5. After the build and test steps, add steps to deploy your application to the respective AWS resources. This can include using AWS CLI commands, AWS SDKs, or specific deployment actions provided by the AWS Marketplace.
+
+6. Save the changes to the `main.yml` file.
+
+7. In your GitHub repository settings, navigate to Secrets and add two new secrets: `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`. Provide the appropriate AWS credentials with the necessary permissions to deploy your application.
+
+Now, whenever you push changes to the `main` branch, the CI/CD pipeline defined in the `main.yml` file will trigger. It will build, test, and deploy your application to the specified AWS resources based on the steps.
